@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  color-scheme: light dark;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #f6f5f1;
+  --surface: #ffffff;
+  --surface-2: #efede7;
+  --ink: #191817;
+  --ink-2: #5f5c55;
+  --ink-3: #97928a;
+  --line: #e7e4dd;
+
+  /* Meter-Farben: Füllung trägt den Status, Track ist ein hellerer Schritt derselben Rampe */
+  --accent: #2a78d6;
+  --accent-soft: #dbe7f6;
+  --warn: #d78f00;
+  --warn-soft: #f5e5c0;
+  --danger: #d03b3b;
+  --danger-soft: #f3d7d7;
+
+  --nav-bg: rgba(255, 255, 255, 0.85);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #131311;
+    --surface: #1d1c1a;
+    --surface-2: #27261f;
+    --ink: #f0eee9;
+    --ink-2: #b3afa6;
+    --ink-3: #7d7970;
+    --line: #2e2d29;
+
+    --accent: #3987e5;
+    --accent-soft: #263a54;
+    --warn: #fab219;
+    --warn-soft: #453811;
+    --danger: #e05252;
+    --danger-soft: #4a2222;
+
+    --nav-bg: rgba(29, 28, 26, 0.85);
   }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --font-sans: var(--font-geist-sans);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes sheet-slide-up {
+  from {
+    transform: translateY(32px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes backdrop-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-sheet {
+  animation: sheet-slide-up 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-backdrop {
+  animation: backdrop-fade-in 0.2s ease-out;
 }
