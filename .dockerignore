@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.env*
+.claude
+.dockerignore
+Dockerfile
+README.md
+CLAUDE.md
