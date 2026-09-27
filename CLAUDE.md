@@ -18,7 +18,7 @@ Persönliche Budget- und Ausgaben-App (mobile-first, installierbar als PWA). Neu
 
 ## Datenbank
 
-⚠️ **`DATABASE_URL` in `.env.local` zeigt auf die produktive Railway-DB mit echten Daten** (TCP-Proxy `switchback.proxy.rlwy.net:42957`). Es gibt keine separate Dev-DB. Keine destruktiven Migrationen/Seeds ohne Rückfrage. Geplant: Umzug zu Coolify (dann nur `DATABASE_URL` tauschen).
+⚠️ **`DATABASE_URL` in `.env.local` zeigt auf die produktive DB mit echten Daten** (Postgres 17 auf Coolify/Hetzner, DB `ausgaben`). Es gibt keine separate Dev-DB. Keine destruktiven Migrationen/Seeds ohne Rückfrage. Die App in Coolify nutzt die interne URL; der öffentliche Port (5432) ist nur für Wartung/Migration offen. Die alte Railway-DB wird nach dem Umzug abgeschaltet.
 
 - `categories` – 18 Kategorien: `slug`, `name`, `icon` (Lucide-Name), `color` (Pastell-Hex), `sort_order`, `budget_cents`
 - `expenses` – `category_id` (FK), `amount_cents`, `description`, `spent_at` (date), `created_at`
