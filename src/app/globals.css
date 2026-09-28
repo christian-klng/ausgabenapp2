@@ -94,3 +94,29 @@ body {
 .animate-backdrop {
   animation: backdrop-fade-in 0.2s ease-out;
 }
+
+@keyframes toast-in {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes toast-out {
+  to {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-toast-out {
+  animation: toast-out 0.2s ease-in forwards;
+}

@@ -8,6 +8,7 @@ import { centsToInput, formatEuro, parseAmountToCents } from "@/lib/format";
 import { CategoryChip } from "./CategoryIcon";
 import Meter from "./Meter";
 import Sheet from "./Sheet";
+import { useToast } from "./Toast";
 
 function BudgetEditSheet({
   entry,
@@ -19,6 +20,7 @@ function BudgetEditSheet({
   const [value, setValue] = useState(centsToInput(entry.budget_cents));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -31,6 +33,7 @@ function BudgetEditSheet({
     setSaving(true);
     try {
       await updateBudget(entry.category_id, cents);
+      toast("Budget gespeichert", `${entry.name} ${formatEuro(cents)}`);
       onClose();
     } catch {
       setError("Speichern fehlgeschlagen – bitte nochmal versuchen");

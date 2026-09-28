@@ -3,9 +3,10 @@
 import { useState } from "react";
 import type { Category, Expense } from "@/lib/types";
 import { createExpense, deleteExpense, updateExpense } from "@/lib/actions";
-import { centsToInput, parseAmountToCents, todayISO } from "@/lib/format";
+import { centsToInput, formatEuro, parseAmountToCents, todayISO } from "@/lib/format";
 import { CategoryChip } from "./CategoryIcon";
 import Sheet from "./Sheet";
+import { useToast } from "./Toast";
 
 export default function ExpenseSheet({
   categories,
@@ -27,6 +28,7 @@ export default function ExpenseSheet({
   const [saving, setSaving] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
 
   const selected = categories.find((c) => c.id === categoryId) ?? category;
 
@@ -51,6 +53,10 @@ export default function ExpenseSheet({
       } else {
         await createExpense(input);
       }
+      toast(
+        expense ? "Änderung gespeichert" : "Ausgabe gespeichert",
+        `${formatEuro(cents)} ${selected.name}`
+      );
       onClose();
     } catch {
       setError("Speichern fehlgeschlagen – bitte nochmal versuchen");
@@ -63,6 +69,7 @@ export default function ExpenseSheet({
     setSaving(true);
     try {
       await deleteExpense(expense.id);
+      toast("Ausgabe gelöscht", `${formatEuro(expense.amount_cents)} ${expense.category_name}`);
       onClose();
     } catch {
       setError("Löschen fehlgeschlagen – bitte nochmal versuchen");
